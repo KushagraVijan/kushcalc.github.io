@@ -143,26 +143,34 @@
                 res = snum;
             }
             if (op == "+") {
-                res = parseInt(fnum) + parseInt(snum);
+                res = parseFloat(fnum) + parseFloat(snum);
             }
             if (op == "-") {
-                res = parseInt(fnum) - parseInt(snum);
+                res = parseFloat(fnum) - parseFloat(snum);
             }
             if (op == "*") {
-                res = parseInt(fnum) * parseInt(snum);
+                res = parseFloat(fnum) * parseFloat(snum);
             }
             if (op == "/") {
-                res = parseInt(fnum) / parseInt(snum);
+                res = parseFloat(fnum) / parseFloat(snum);
             }
             if (op == "%") {
-                res = parseInt(fnum) % parseInt(snum);
+                res = parseFloat(fnum) % parseFloat(snum);
             }
         }
-
+        
+        function isdecimal(){
+            var num = "" + res;
+            if(num.indexOf(".")!=-1){
+                res = res.toFixed(2);
+            }
+        }
+        
         function eq() {
             snum = document.getElementById("outputpanel").innerHTML;
             result(operator);
             operator = undefined;
+            isdecimal();
             document.getElementById("outputpanel").innerHTML = res;
         }
     </script>
