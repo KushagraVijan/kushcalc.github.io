@@ -13,6 +13,7 @@
         }
         
         #outputpanel {
+            background-color: rgba(0,0,255,0.1);
             font-size: 35px;
             text-align: right;
             width: 99.5%;
@@ -94,7 +95,7 @@
             }
             if (num == "." && no.indexOf(num) != -1) {
                 alert("Not Allowed");
-            } else if (no.length == 16) {
+            } else if (no.length == 15) {
                 alert("Maximum Digits reached");
             } else {
                 no = no + num;
