@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        #calc {
+            margin-top: 75px;
+            margin-left: 75px;
+            width: 300px;
+            height: 450px;
+            border: 1px solid black;
+        }
+        
+        #outputpanel {
+            font-size: 35px;
+            text-align: right;
+            width: 100%;
+            height: 75px;
+            border-bottom: 1px solid black;
+        }
+        
+        #row {
+            height: 75px;
+        }
+        
+        button {
+            font-size: 20px;
+            font-weight: bold;
+            float: left;
+            width: 25%;
+            height: 75px;
+        }
+        
+        #cbtn {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calc">
+        <div id="outputpanel">0</div>
+        <div id="buttons">
+            <div id="row">
+                <button onclick="clearall()" id="cbtn">clear</button>
+                <button onclick="operation(this)">+</button>
+                <button onclick="operation(this)">-</button>
+            </div>
+            <div id="row">
+                <button onclick="getno(this)">7</button>
+                <button onclick="getno(this)">8</button>
+                <button onclick="getno(this)">9</button>
+                <button onclick="operation(this)">*</button>
+            </div>
+            <div id="row">
+                <button onclick="getno(this)">4</button>
+                <button onclick="getno(this)">5</button>
+                <button onclick="getno(this)">6</button>
+                <button onclick="operation(this)">/</button>
+            </div>
+            <div id="row">
+                <button onclick="getno(this)">1</button>
+                <button onclick="getno(this)">2</button>
+                <button onclick="getno(this)">3</button>
+                <button onclick="operation(this)">%</button>
+            </div>
+            <div id="row">
+                <button onclick="getno(this)">0</button>
+                <button onclick="getno(this)">.</button>
+                <button onclick="backspace()">back</button>
+                <button onclick="eq()">=</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var no = "";
+        var issecond = false;
+        var fnum;
+        var snum;
+        var operator;
+        var res;
+
+        function getno(n) {
+            var num = n.innerHTML;
+            if (no == "0") {
+                no = "";
+            }
+            if (num == "." && no.indexOf(num) != -1) {
+                alert("Not Allowed");
+            } else if (no.length == 16) {
+                alert("Maximum Digits reached");
+            } else {
+                no = no + num;
+            }
+            res = no;
+            document.getElementById("outputpanel").innerHTML = no;
+        }
+
+        function clearall() {
+            no = "0";
+            operator = undefined;
+            issecond = false;
+            fnum = undefined;
+            snum = undefined;
+            res = undefined;
+            document.getElementById("outputpanel").innerHTML = no;
+        }
+
+        function backspace() {
+            if (no.length == 1) {
+                no = "0";
+            } else {
+                no = no.slice(0, no.length - 1);
+            }
+            document.getElementById("outputpanel").innerHTML = no;
+        }
+
+        function operation(a) {
+            var num = document.getElementById("outputpanel").innerHTML;
+            document.getElementById("outputpanel").innerHTML = "";
+            no = "0";
+            if (issecond != true) {
+                fnum = num;
+                issecond = true;
+            } else {
+                snum = num;
+                result(operator);
+                fnum = res;
+            }
+            operator = a.innerHTML;
+        }
+
+        function result(op) {
+            if (op == undefined) {
+                res = snum;
+            }
+            if (op == "+") {
+                res = parseInt(fnum) + parseInt(snum);
+            }
+            if (op == "-") {
+                res = parseInt(fnum) - parseInt(snum);
+            }
+            if (op == "*") {
+                res = parseInt(fnum) * parseInt(snum);
+            }
+            if (op == "/") {
+                res = parseInt(fnum) / parseInt(snum);
+            }
+            if (op == "%") {
+                res = parseInt(fnum) % parseInt(snum);
+            }
+        }
+
+        function eq() {
+            snum = document.getElementById("outputpanel").innerHTML;
+            result(operator);
+            operator = undefined;
+            document.getElementById("outputpanel").innerHTML = res;
+        }
+    </script>
+</body>
+
+</html>
