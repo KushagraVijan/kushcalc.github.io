@@ -1,2 +1,1 @@
-# kushcalculator.github.io
 Calculator
